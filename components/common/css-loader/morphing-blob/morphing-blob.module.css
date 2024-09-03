@@ -1,0 +1,32 @@
+.loader {
+  position: relative;
+}
+
+.blob {
+  background: linear-gradient(135deg, var(--point-color), #e0c3fc);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(142, 197, 252, 0.5);
+  animation: morph 5s linear infinite;
+}
+
+@keyframes morph {
+  0%,
+  100% {
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  33% {
+    border-radius: 30% 70% 70% 30% / 30% 29% 71% 70%;
+    transform: translate(-50%, -50%) rotate(90deg) scale(1.2);
+  }
+
+  66% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(-50%, -50%) rotate(180deg) scale(0.8);
+  }
+}

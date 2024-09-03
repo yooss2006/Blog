@@ -159,12 +159,5 @@
     "@typescript-eslint/no-shadow": "error",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "prettier/prettier": [
-      "error",
-      {},
-      {
-        "usePrettierrc": true
-      }
-    ]
   }
 }
