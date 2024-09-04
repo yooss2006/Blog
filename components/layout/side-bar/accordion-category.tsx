@@ -24,7 +24,10 @@ export default function AccordionCategory({
   path = "",
   level = 0,
 }: Props) {
-  const currentLevelPath = usePathname().split("/").slice(2)[level];
+  const pathname = decodeURIComponent(usePathname());
+  const pathnameSet = pathname.split("/").slice(2); // ["", "blog"]를 지우기 위함
+  const currentLevelPath = pathnameSet[level];
+
   const dynamicPaddingLeft = `${8 + level * 16}px`;
   const menuNames = Object.keys(menu);
   return (
@@ -43,12 +46,15 @@ export default function AccordionCategory({
               className={cn(
                 buttonVariants({ variant: "outline" }),
                 "py-4 m-2 leading-6 flex justify-start border-none gap-2",
-                currentLevelPath === menuName && "font-semibold bg-red-50"
+                pathname === `${path}/${menuName}` &&
+                  "font-semibold bg-pointColor text-white"
               )}
               style={{ paddingLeft: dynamicPaddingLeft }}
             >
               <FileText className="w-4 h-4" />
-              <p className="max-w-64 text-ellipsis truncate">{menuName}</p>
+              <span className="max-w-64 text-ellipsis truncate">
+                {menuName}
+              </span>
             </Link>
           );
         }
@@ -60,7 +66,9 @@ export default function AccordionCategory({
             >
               <p className="flex items-center gap-2">
                 <Folder className="w-4 h-4" />
-                <p className="max-w-48 text-ellipsis truncate">{menuName}</p>
+                <span className="max-w-48 text-ellipsis truncate">
+                  {menuName}
+                </span>
               </p>
             </AccordionTrigger>
             <AccordionContent className="pb-1">

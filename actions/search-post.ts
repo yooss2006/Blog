@@ -1,24 +1,67 @@
 "use server";
 
-import { readdirSync } from "fs";
-// import { readFile } from "fs/promises";
+import { promises as fs } from "fs";
 import path from "path";
 
-type BlogPostStructureTYpe = {
+type BlogPostStructureType = {
   structure: Record<string, any>;
   nextPath: string;
 };
 
-export const getPosts = async (params?: BlogPostStructureTYpe) => {
+interface PostStructure {
+  [key: string]: PostStructure | { post: string };
+}
+
+function findObjectWithPost(
+  postStructure: Record<string, any>,
+  keyword: string
+): PostStructure {
+  const result: PostStructure = {};
+
+  function search(current: PostStructure, path: string[] = []) {
+    for (const [key, value] of Object.entries(current)) {
+      if (
+        key.includes(keyword) &&
+        typeof value === "object" &&
+        "post" in value
+      ) {
+        let temp = result;
+        for (let i = 0; i < path.length; i++) {
+          temp[path[i]] = temp[path[i]] || {};
+          temp = temp[path[i]] as PostStructure;
+        }
+        temp[key] = value;
+      }
+
+      if (typeof value === "object" && value !== null && !("post" in value)) {
+        search(value as PostStructure, [...path, key]);
+      }
+    }
+  }
+
+  search(postStructure);
+  return result;
+}
+
+export const searchPosts = async (keyword: string): Promise<PostStructure> => {
+  const postStructure = await getPosts();
+  if (!keyword) return postStructure;
+  return findObjectWithPost(postStructure, keyword);
+};
+
+export const getPosts = async (
+  params?: BlogPostStructureType
+): Promise<Record<string, any>> => {
   const { structure, nextPath } = params ?? {};
   const rootPath = nextPath
     ? nextPath
     : path.join(process.cwd(), "public", "blog", "posts");
   const fileStructure: Record<string, any> = structure ?? {};
-  const files = await readdirSync(rootPath, { withFileTypes: true });
 
-  files
-    .filter((file) => file.isDirectory() || file.name.includes(".md"))
+  const files = await fs.readdir(rootPath, { withFileTypes: true });
+
+  const sortedFiles = files
+    .filter((file) => file.isDirectory() || file.name.endsWith(".md"))
     .sort((a, b) => {
       if (
         (a.isDirectory() && b.isDirectory()) ||
@@ -26,17 +69,20 @@ export const getPosts = async (params?: BlogPostStructureTYpe) => {
       )
         return a.name.localeCompare(b.name);
       return a.isDirectory() ? -1 : 1;
-    })
-    .forEach(async (file) => {
-      if (file.isDirectory()) {
-        fileStructure[file.name] = await getPosts({
-          structure: {},
-          nextPath: path.join(rootPath, file.name),
-        });
-      } else if (file.name.includes(".md")) {
-        fileStructure[file.name.slice(0, -3)] = file.name;
-      }
     });
+
+  const filePromises = sortedFiles.map(async (file) => {
+    if (file.isDirectory()) {
+      fileStructure[file.name] = await getPosts({
+        structure: {},
+        nextPath: path.join(rootPath, file.name),
+      });
+    } else if (file.name.endsWith(".md")) {
+      fileStructure["post"] = file.name;
+    }
+  });
+
+  await Promise.all(filePromises);
 
   return fileStructure;
 };
