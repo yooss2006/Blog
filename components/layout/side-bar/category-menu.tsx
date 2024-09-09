@@ -14,6 +14,7 @@ export function CategoryMenu() {
   });
 
   if (isLoading) return <FullScreenLoader />;
+  if (!menu) return "카테고리가 없습니다.";
 
   return (
     <nav className="h-full">

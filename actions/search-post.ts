@@ -3,11 +3,6 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-type BlogPostStructureType = {
-  structure: Record<string, any>;
-  nextPath: string;
-};
-
 interface PostStructure {
   [key: string]: PostStructure | { post: string };
 }
@@ -44,47 +39,21 @@ function findObjectWithPost(
 }
 
 export const searchPosts = async (keyword: string): Promise<PostStructure> => {
-  const postStructure = await getPosts();
-  if (!keyword) return postStructure;
-  return findObjectWithPost(postStructure, keyword);
-};
+  try {
+    const structurePath = path.join(
+      process.cwd(),
+      "public",
+      "blog",
+      "structure.json"
+    );
+    const fileContents = await fs.readFile(structurePath, "utf8");
+    const structure = JSON.parse(fileContents);
 
-export const getPosts = async (
-  params?: BlogPostStructureType
-): Promise<Record<string, any>> => {
-  const { structure, nextPath } = params ?? {};
-  const rootPath = nextPath
-    ? nextPath
-    : path.join(process.cwd(), "public", "blog", "posts");
-  const fileStructure: Record<string, any> = structure ?? {};
-
-  const files = await fs.readdir(rootPath, { withFileTypes: true });
-
-  const sortedFiles = files
-    .filter((file) => file.isDirectory() || file.name.endsWith(".md"))
-    .sort((a, b) => {
-      if (
-        (a.isDirectory() && b.isDirectory()) ||
-        (!a.isDirectory() && !b.isDirectory())
-      )
-        return a.name.localeCompare(b.name);
-      return a.isDirectory() ? -1 : 1;
-    });
-
-  const filePromises = sortedFiles.map(async (file) => {
-    if (file.isDirectory()) {
-      fileStructure[file.name] = await getPosts({
-        structure: {},
-        nextPath: path.join(rootPath, file.name),
-      });
-    } else if (file.name.endsWith(".md")) {
-      fileStructure["post"] = file.name;
-    }
-  });
-
-  await Promise.all(filePromises);
-
-  return fileStructure;
+    return findObjectWithPost(structure, keyword);
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 };
 
 // export function getBlogStructure(param?: BlogPostStructureTYpe) {

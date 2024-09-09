@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run write-post-structure && next dev",
+    "build": "npm run write-post-structure && next build",
     "start": "next start",
     "lint": "next lint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
+    "write-post-structure": "node scripts/writePostStructure.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",

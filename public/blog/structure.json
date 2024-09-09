@@ -1,0 +1,31 @@
+{
+  "javascript copy": {
+    "every": {
+      "post": "post.md"
+    },
+    "some": {
+      "post": "post.md"
+    }
+  },
+  "javascript copy fasafasfaasfasfasffafafsasf": {
+    "everydasdasasdasdasdasdasdasdasdasasdadasasdas": {
+      "post": "post.md"
+    },
+    "some": {
+      "post": "post.md"
+    }
+  },
+  "javascript": {
+    "every": {
+      "post": "post.md"
+    },
+    "some": {
+      "post": "post.md"
+    },
+    "hi": {
+      "koko": {
+        "post": "post.md"
+      }
+    }
+  }
+}
