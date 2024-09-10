@@ -13,6 +13,7 @@ import {
   SheetDescription,
 } from "../../ui/sheet";
 import { LoadingPage } from "@/components/common/loading-page";
+import SocialBox from "./social-box";
 
 function MobileSideBar() {
   const { isOpen, onclose, toggle } = useSideBar((state) => ({
@@ -38,7 +39,7 @@ function MobileSideBar() {
             <div className="grow overflow-y-auto custom-scrollbar">
               <CategoryMenu />
             </div>
-            <div>블로그</div>
+            <SocialBox />
           </div>
         </div>
       </SheetContent>
@@ -54,7 +55,7 @@ function DesktopSideBar() {
         <div className="grow overflow-y-auto custom-scrollbar">
           <CategoryMenu />
         </div>
-        <div>깃허브</div>
+        <SocialBox />
       </div>
     </div>
   );
