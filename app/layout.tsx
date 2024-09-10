@@ -22,7 +22,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <div className="w-full h-full flex">
             <SideBar />
-            <div className="flex-1 text-normalColor">
+            <div className="flex-1 text-normalColor overflow-hidden">
               <Header />
               {children}
             </div>

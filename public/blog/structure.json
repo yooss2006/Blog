@@ -1,17 +1,17 @@
 {
-  "javascript copy": {
-    "every": {
+  "react": {
+    "some": {
       "post": "post.md"
     },
-    "some": {
+    "every": {
       "post": "post.md"
     }
   },
-  "javascript copy fasafasfaasfasfasffafafsasf": {
-    "everydasdasasdasdasdasdasdasdasdasasdadasasdas": {
+  "supabase": {
+    "some": {
       "post": "post.md"
     },
-    "some": {
+    "everydasdasasdasdasdasdasdasdasdasasdadasasdas": {
       "post": "post.md"
     }
   },

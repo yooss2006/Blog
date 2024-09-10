@@ -1,6 +1,6 @@
 "use client";
 
-import { searchPosts } from "@/actions/search-post";
+import { searchPostStructure } from "@/actions/search-post-structure";
 import { useSearch } from "@/model/use-search";
 import { useQuery } from "@tanstack/react-query";
 import AccordionCategory from "./accordion-category";
@@ -10,7 +10,7 @@ export function CategoryMenu() {
   const text = useSearch((state) => state.text);
   const { data: menu, isLoading } = useQuery({
     queryKey: ["category-menu", text],
-    queryFn: ({ queryKey }) => searchPosts(queryKey[1]),
+    queryFn: ({ queryKey }) => searchPostStructure(queryKey[1]),
   });
 
   if (isLoading) return <FullScreenLoader />;
