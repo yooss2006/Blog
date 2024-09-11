@@ -1,17 +1,17 @@
 {
   "react": {
-    "some": {
+    "every": {
       "post": "post.md"
     },
-    "every": {
+    "some": {
       "post": "post.md"
     }
   },
   "supabase": {
-    "some": {
+    "everydasdasasdasdasdasdasdasdasdasasdadasasdas": {
       "post": "post.md"
     },
-    "everydasdasasdasdasdasdasdasdasdasasdadasasdas": {
+    "some": {
       "post": "post.md"
     }
   },

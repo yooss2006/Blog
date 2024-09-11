@@ -1,8 +1,9 @@
-import { getThumbnailPath } from "@/actions/post";
-import { PostMeta } from "@/types/post";
 import { ChevronDownCircle } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+
+import { getThumbnailPath } from "@/actions/post";
+import { PostMeta } from "@/types/post";
 
 type Props = {
   slug: Array<string>;
@@ -26,7 +27,9 @@ export default async function PostHeader({
           alt={`${title} 이미지`}
           priority
         />
-        <h2 className="pt-4 pb-6 text-7xl font-bold">{title}</h2>
+        <h2 className="pt-4 pb-6 text-7xl font-bold text-pointColor">
+          {title}
+        </h2>
         <p className="text-xl my-2 break-word">{description}</p>
         <p className="font-light">{date}</p>
       </div>
