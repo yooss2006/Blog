@@ -11,6 +11,9 @@ import { pretendard } from "./fonts";
 export const metadata: Metadata = {
   title: "긱 갱스터 블로그",
   description: "긱 갱스터 블로그",
+  verification: {
+    google: "yRNuE0zjFXY4ZM0HpF_T0M_XPlh_DrbW1p6MBj6ztuc",
+  },
 };
 
 export default function RootLayout({

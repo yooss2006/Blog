@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+ 
+Host: https://geek-gangster.vercel.app
+Sitemap: https://geek-gangster.vercel.app/sitemap.xml
