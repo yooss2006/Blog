@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   description: "긱 갱스터 블로그",
   verification: {
     google: "yRNuE0zjFXY4ZM0HpF_T0M_XPlh_DrbW1p6MBj6ztuc",
+    other: {
+      "naver-site-verification": "0affda2571a89535996089b36c824cec1b8bafe7",
+    },
   },
 };
 
