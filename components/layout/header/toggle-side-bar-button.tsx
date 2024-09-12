@@ -45,21 +45,21 @@ export default function ToggleSideBarButton({
         className={cn(
           "block absolute left-0 w-full bg-normalColor transition-all duration-300",
           lineHeights,
-          isOpen ? "bg-transparent" : "top-1/2 -translate-y-1/2"
+          isOpen ? "bg-transparent" : "top-1/2 -translate-y-1/2",
         )}
       >
         <span
           className={cn(
             "block absolute left-0 w-full bg-normalColor transition-all duration-300",
             lineHeights,
-            isOpen ? "top-0 rotate-45" : lineSpacings.split(" ")[0]
+            isOpen ? "top-0 rotate-45" : lineSpacings.split(" ")[0],
           )}
         />
         <span
           className={cn(
             "block absolute left-0 w-full bg-normalColor transition-all duration-300",
             lineHeights,
-            isOpen ? "top-0 -rotate-45" : lineSpacings.split(" ")[1]
+            isOpen ? "top-0 -rotate-45" : lineSpacings.split(" ")[1],
           )}
         />
       </span>

@@ -1,9 +1,11 @@
 "use client";
 
-import { useSearch } from "@/model/use-search";
-import { Input } from "../../ui/input";
 import { useEffect, useState } from "react";
+
 import useDebounce from "@/hooks/use-debounce";
+import { useSearch } from "@/model/use-search";
+
+import { Input } from "../../ui/input";
 
 export default function SearchInput() {
   const [value, setValue] = useState("");
@@ -19,7 +21,7 @@ export default function SearchInput() {
 
   useEffect(() => {
     onTextChange(debouncedValue);
-  }, [debouncedValue]);
+  }, [debouncedValue, onTextChange]);
 
   return (
     <div>

@@ -1,10 +1,11 @@
+import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { GithubIcon, LinkedinIcon, MailIcon } from "lucide-react";
 
 const socialLinks = [
   {

@@ -1,10 +1,11 @@
 "use client";
 
-import { useMedia } from "@/hooks/use-media";
-import { CategoryMenu } from "./category-menu";
-import SearchInput from "./search-input";
 import { useEffect, useState } from "react";
+
+import { LoadingPage } from "@/components/common/loading-page";
+import { useMedia } from "@/hooks/use-media";
 import { useSideBar } from "@/model/use-sidebar";
+
 import {
   SheetContent,
   Sheet,
@@ -12,7 +13,9 @@ import {
   SheetTitle,
   SheetDescription,
 } from "../../ui/sheet";
-import { LoadingPage } from "@/components/common/loading-page";
+
+import { CategoryMenu } from "./category-menu";
+import SearchInput from "./search-input";
 import SocialBox from "./social-box";
 
 function MobileSideBar() {
@@ -24,7 +27,7 @@ function MobileSideBar() {
 
   useEffect(() => {
     onclose();
-  }, []);
+  }, [onclose]);
 
   return (
     <Sheet open={isOpen} onOpenChange={toggle}>
@@ -71,5 +74,6 @@ export default function SideBar() {
 
   if (!mounted) return <LoadingPage />;
 
-  return <>{isWide ? <DesktopSideBar /> : <MobileSideBar />}</>;
+  if (!isWide) return <MobileSideBar />;
+  return <DesktopSideBar />;
 }

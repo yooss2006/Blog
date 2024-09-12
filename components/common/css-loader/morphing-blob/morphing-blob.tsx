@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+
 import styles from "./morphing-blob.module.css";
 
 const loaderVariants = {
@@ -19,7 +20,7 @@ export function MorphingBlob({
 }) {
   return (
     <div className={cn(styles.loader, loaderVariants[size].loader)}>
-      <div className={cn(styles.blob, loaderVariants[size].blob)}></div>
+      <div className={cn(styles.blob, loaderVariants[size].blob)} />
     </div>
   );
 }

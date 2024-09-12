@@ -1,17 +1,18 @@
 "use client";
 
+import { FileText, Folder } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FileText, Folder } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
-import React from "react";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 
 type Props = {
   menu: Record<string, any>;

@@ -1,8 +1,9 @@
 "use server";
 
-import { PostMeta } from "@/types/post";
 import { promises as fs } from "fs";
 import path from "path";
+
+import { PostMeta } from "@/types/post";
 
 const HEADER_REGEX = /(\w+):\s*["']?([^"'\n]+)["']?/g;
 const CONTENT_SEPARATOR = "---";
@@ -27,6 +28,7 @@ const getHeaderContent = (headerString: string) => {
   const resultObject: Partial<PostMeta> = {};
   let match;
 
+  // eslint-disable-next-line no-cond-assign
   while ((match = HEADER_REGEX.exec(headerString)) !== null) {
     const [, key, value] = match;
     if (key && value) {
@@ -44,9 +46,7 @@ const getHeaderContent = (headerString: string) => {
 export const getThumbnailPath = async (
   slug: Array<string>,
   extension: string = "jpg"
-): Promise<string> => {
-  return `/blog/posts/${slug.join("/")}/thumbnail.${extension}`;
-};
+): Promise<string> => `/blog/posts/${slug.join("/")}/thumbnail.${extension}`;
 
 export const getPost = async (slug: Array<string>) => {
   try {

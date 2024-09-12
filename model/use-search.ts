@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 export enum ViewType {
-  Normal = "normal", //작성일 보기
-  Date = "date", //기본 보기
+  Normal = "normal", // 작성일 보기
+  Date = "date", // 기본 보기
 }
 
 type Props = {

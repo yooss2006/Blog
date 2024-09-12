@@ -9,7 +9,7 @@ interface PostStructure {
 
 function findObjectWithPost(
   postStructure: Record<string, any>,
-  keyword: string
+  keyword: string,
 ): PostStructure {
   const result: PostStructure = {};
 
@@ -39,14 +39,14 @@ function findObjectWithPost(
 }
 
 export const searchPostStructure = async (
-  keyword: string
+  keyword: string,
 ): Promise<PostStructure> => {
   try {
     const structurePath = path.join(
       process.cwd(),
       "public",
       "blog",
-      "structure.json"
+      "structure.json",
     );
     const fileContents = await fs.readFile(structurePath, "utf8");
     const structure = JSON.parse(fileContents);
@@ -54,6 +54,5 @@ export const searchPostStructure = async (
     return findObjectWithPost(structure, keyword);
   } catch (error) {
     console.error(error);
-    return;
   }
 };

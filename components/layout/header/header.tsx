@@ -9,7 +9,7 @@ export default function Header() {
         </div>
       </div>
       <h1 className="text-xl text-pointColor">긱 갱스터 블로그</h1>
-      <div></div>
+      <div />
     </header>
   );
 }

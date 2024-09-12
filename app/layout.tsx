@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Header from "../components/layout/header/header";
-import { pretendard } from "./fonts";
-import SideBar from "../components/layout/side-bar/side-bar";
 import { ReactQueryProvider } from "@/components/providers/app-provider";
+
+import Header from "../components/layout/header/header";
+import SideBar from "../components/layout/side-bar/side-bar";
+
+import { pretendard } from "./fonts";
 
 export const metadata: Metadata = {
   title: "긱 갱스터 블로그",

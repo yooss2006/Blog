@@ -52,7 +52,7 @@ function CustomLink({
       {...props}
       className={cn(
         "text-sky-700 dark:text-sky-400 hover:text-sky-500 hover:dark:text-sky-300",
-        !isExternalLink && "no-underline"
+        !isExternalLink && "no-underline",
       )}
     >
       {children}
