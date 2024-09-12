@@ -9,29 +9,38 @@ interface PostStructure {
 
 function findObjectWithPost(
   postStructure: Record<string, any>,
-  keyword: string,
+  keyword: string
 ): PostStructure {
   const result: PostStructure = {};
+  function search(current: PostStructure, pathArray: Array<string> = []): void {
+    Object.keys(current).forEach((key) => {
+      const value = current[key];
 
-  function search(current: PostStructure, path: string[] = []) {
-    for (const [key, value] of Object.entries(current)) {
       if (
         key.includes(keyword) &&
         typeof value === "object" &&
         "post" in value
       ) {
         let temp = result;
-        for (let i = 0; i < path.length; i++) {
-          temp[path[i]] = temp[path[i]] || {};
-          temp = temp[path[i]] as PostStructure;
+        pathArray.forEach((pathKey, index) => {
+          if (index < pathArray.length - 1) {
+            temp[pathKey] = temp[pathKey] || {};
+            temp = temp[pathKey] as PostStructure;
+          } else {
+            temp[pathKey] = temp[pathKey] || {};
+            temp[pathKey][key] = value;
+          }
+        });
+
+        if (pathArray.length === 0) {
+          result[key] = value;
         }
-        temp[key] = value;
       }
 
       if (typeof value === "object" && value !== null && !("post" in value)) {
-        search(value as PostStructure, [...path, key]);
+        search(value as PostStructure, [...pathArray, key]);
       }
-    }
+    });
   }
 
   search(postStructure);
@@ -39,20 +48,20 @@ function findObjectWithPost(
 }
 
 export const searchPostStructure = async (
-  keyword: string,
+  keyword: string
 ): Promise<PostStructure> => {
   try {
     const structurePath = path.join(
       process.cwd(),
       "public",
       "blog",
-      "structure.json",
+      "structure.json"
     );
     const fileContents = await fs.readFile(structurePath, "utf8");
     const structure = JSON.parse(fileContents);
-
     return findObjectWithPost(structure, keyword);
   } catch (error) {
     console.error(error);
+    return undefined;
   }
 };
